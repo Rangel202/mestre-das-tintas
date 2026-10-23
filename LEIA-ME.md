@@ -31,8 +31,21 @@ Procure por **EDITAR** no `index.html` e no `js/main.js`.
 
 ## Como publicar
 
-- **Mais rápido:** [app.netlify.com/drop](https://app.netlify.com/drop) → arraste a pasta inteira.
-- **Vercel / Cloudflare Pages:** suba a pasta como site estático (sem build).
+O site está no ar em **https://mestre-das-tintas-mu.vercel.app** (Vercel, time Rangel LTDA).
+
+O repositório [github.com/Rangel202/mestre-das-tintas](https://github.com/Rangel202/mestre-das-tintas) está ligado ao Vercel:
+**todo commit enviado para a branch `main` publica o site sozinho** em cerca de 1 minuto.
+
+```bash
+git add -A
+git commit -m "Troca WhatsApp e fotos reais"
+git push
+```
+
+Para usar um domínio próprio (ex.: `mestredastintas.com.br`): painel do Vercel → projeto `mestre-das-tintas` → Settings → Domains.
+
+Outras opções, se um dia precisar trocar de hospedagem:
+- **Netlify:** [app.netlify.com/drop](https://app.netlify.com/drop) → arraste a pasta inteira.
 - **Hospedagem comum (Hostinger, HostGator…):** envie `index.html`, `css/`, `js/`, `assets/` e `site.webmanifest` para a pasta `public_html`.
 
 ## Recursos do site
