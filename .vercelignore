@@ -1,0 +1,6 @@
+.claude
+.vercel
+.env*
+.gitignore
+LEIA-ME.md
+assets/brand/logo-original.webp

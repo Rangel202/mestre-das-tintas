@@ -1,0 +1,10 @@
+# Vercel (token local e vínculo do projeto)
+.vercel
+.env*
+
+# Ferramentas locais de pré-visualização
+.claude/
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,13 @@
+{
+  "name": "Mestre das Tintas",
+  "short_name": "Mestre",
+  "description": "Pintura residencial e comercial — orçamento grátis.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#011C30",
+  "theme_color": "#011C30",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "assets/brand/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
