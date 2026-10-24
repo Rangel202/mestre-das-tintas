@@ -12,15 +12,6 @@
     whatsapp: '5500000000000',
     // Mensagem usada quando um link não define a própria
     mensagemPadrao: 'Olá, Mestre das Tintas! Vim pelo site e quero um orçamento grátis.',
-    // Parâmetros da calculadora (ajuste à realidade da equipe)
-    calc: {
-      demaos: 2,
-      rendimento: { interna: 11, externa: 9, comercial: 11 },       // m² por litro, por demão
-      fatorParede: { interna: 2.7, externa: 1.4, comercial: 2.2 },  // m² de parede por m² de piso
-      produtividade: { interna: 45, externa: 35, comercial: 55 },   // m² pintados por dia (equipe)
-      fatorEstado: { boa: 1, reparos: 1.35, danificada: 1.7 },      // tempo extra de preparo
-      absorcao: { boa: 1, reparos: 1.05, danificada: 1.12 },        // tinta extra em parede porosa
-    },
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -277,71 +268,6 @@
         onEnter: () => setTimeout(() => { if (!touched) choose(sws[2], false); }, 600),
       });
     }
-  }
-
-  /* ---------- Calculadora ---------- */
-  const calc = $('.calc');
-  if (calc) {
-    const area = $('#area', calc);
-    const areaOut = $('.calc__area span', calc);
-    const cansEl = $('.cans', calc);
-    const cta = $('.calc__cta', calc);
-    const outs = { m2: $('[data-out="m2"]', calc), latas: $('[data-out="latas"]', calc), dias: $('[data-out="dias"]', calc) };
-    const shown = { m2: 0, latas: 0, dias: 0 };
-    const labels = { interna: 'Interna', externa: 'Externa', comercial: 'Comercial', boa: 'Boas', reparos: 'Precisam de reparos', danificada: 'Muito danificadas' };
-    const roofLabel = $('.switch', calc);
-    let lastCans = -1, lastTick = 0;
-
-    const animateNum = (k, v) => {
-      if (!motion) { outs[k].textContent = v; shown[k] = v; return; }
-      gsap.to(shown, { [k]: v, duration: .65, ease: 'power2.out', overwrite: 'auto', onUpdate: () => { outs[k].textContent = Math.round(shown[k]); } });
-    };
-
-    const renderCans = (n) => {
-      if (n === lastCans) return;
-      const prev = lastCans < 0 ? 0 : Math.min(lastCans, 12);
-      lastCans = n;
-      cansEl.innerHTML = '';
-      for (let i = 0; i < Math.min(n, 12); i++) cansEl.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 28 36"><use href="#i-can"/></svg>');
-      if (n > 12) cansEl.insertAdjacentHTML('beforeend', `<span class="more">+${n - 12}</span>`);
-      const fresh = Array.from(cansEl.children).slice(prev);
-      if (motion && fresh.length) gsap.from(fresh, { y: -16, scale: .4, opacity: 0, duration: .45, stagger: .04, ease: 'back.out(2.4)' });
-    };
-
-    const compute = () => {
-      const c = CONFIG.calc;
-      const tipo = calc.elements.tipo.value;
-      const estado = calc.elements.estado.value;
-      const externa = tipo === 'externa';
-      roofLabel.style.opacity = externa ? .4 : 1;
-      calc.elements.teto.disabled = externa;
-      const teto = calc.elements.teto.checked && !externa;
-      const a = Number(area.value);
-      const m2 = Math.round(a * c.fatorParede[tipo] + (teto ? a : 0));
-      const litros = ((m2 * c.demaos) / c.rendimento[tipo]) * c.absorcao[estado];
-      const latas = Math.max(1, Math.ceil(litros / 18));
-      const dias = Math.max(1, Math.ceil((m2 / c.produtividade[tipo]) * c.fatorEstado[estado]));
-
-      areaOut.textContent = a;
-      area.style.setProperty('--v', `${((a - area.min) / (area.max - area.min)) * 100}%`);
-      animateNum('m2', m2);
-      animateNum('latas', latas);
-      animateNum('dias', dias);
-      renderCans(latas);
-      setWa(cta, `Olá! Fiz a simulação no site:\n• Tipo: ${labels[tipo]}\n• Área do imóvel: ${a} m²\n• Paredes: ${labels[estado]}\n• Teto: ${teto ? 'sim' : 'não'}\nEstimativa: ${m2} m² de pintura, ~${latas} lata(s) de 18 L e ~${dias} dia(s) de obra.\nQuero um orçamento exato!`);
-    };
-
-    calc.addEventListener('input', (e) => {
-      if (e.target === area) {
-        const v = Number(area.value);
-        if (v % 50 === 0 && v !== lastTick) { vibrate(4); lastTick = v; }
-      }
-      compute();
-    });
-    calc.addEventListener('change', (e) => { if (e.target.type !== 'range') vibrate(8); });
-
-    if (motion) ST.create({ trigger: calc, start: 'top 75%', once: true, onEnter: compute });
-    else compute();
   }
 
   /* ---------- Obras: pilha de cards arrastável ---------- */
