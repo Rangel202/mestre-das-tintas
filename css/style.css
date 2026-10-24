@@ -253,6 +253,10 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .hero__media { position: absolute; inset: 0; z-index: -1; will-change: transform; }
 .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .hero__img--before { filter: grayscale(1) brightness(.48) contrast(1.15); }
+/* No celular, sobe a foto para o pintor aparecer acima do texto */
+@media (max-width: 959px) {
+  .hero__img { transform: scale(1.2); transform-origin: 58% 100%; }
+}
 .hero__paint { position: absolute; inset: 0; will-change: clip-path; }
 .hero__shade {
   position: absolute; inset: 0;
@@ -354,18 +358,6 @@ html.menu-open, html.menu-open body { overflow: hidden; }
   background: #ccc;
 }
 .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
-.ba__before { filter: grayscale(.8) sepia(.45) brightness(.8) contrast(.86) saturate(.85); }
-.ba__stains {
-  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply;
-  background:
-    radial-gradient(34% 22% at 18% 18%, rgba(120,92,40,.45), transparent 70%),
-    radial-gradient(22% 16% at 78% 10%, rgba(80,72,40,.5), transparent 70%),
-    radial-gradient(26% 20% at 60% 38%, rgba(110,84,50,.32), transparent 70%),
-    radial-gradient(16% 28% at 94% 30%, rgba(60,64,44,.5), transparent 72%),
-    radial-gradient(40% 8% at 50% 0%, rgba(50,56,40,.55), transparent 80%),
-    linear-gradient(180deg, rgba(90,70,35,.18), rgba(40,30,20,.28));
-}
-.ba__cracks { position: absolute; left: 0; top: 0; width: 100%; height: 100%; fill: none; stroke: rgba(40,30,20,.55); stroke-width: .35; pointer-events: none; }
 .ba__after { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
 .ba__label {
   position: absolute; top: 16px; z-index: 2;
@@ -606,7 +598,7 @@ html.menu-open, html.menu-open body { overflow: hidden; }
 .stack__card b { font-size: 1.4rem; letter-spacing: -.03em; line-height: 1.1; }
 .stack__card small { font-size: .85rem; color: rgba(255,255,255,.75); }
 .no-gsap .stack__card { transition: transform .5s var(--ease), opacity .5s; }
-.stack__ctrl { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 26px; }
+.stack__ctrl { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 76px; }
 .icon-btn { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.25); transition: background .3s, transform .3s var(--ease); }
 .icon-btn:active { transform: scale(.9); background: var(--blue); }
 .stack__count { font-weight: 700; font-size: .95rem; letter-spacing: .12em; color: rgba(255,255,255,.6); font-variant-numeric: tabular-nums; min-width: 72px; text-align: center; }

@@ -25,7 +25,7 @@ Procure por **EDITAR** no `index.html` e no `js/main.js`.
 | `index.html` → CTA final e FAQ | Horário, cidade/região, formas de pagamento. |
 | `index.html` → seção "Por que o Mestre?" | Números reais (`+500 obras`, `10+ anos`). |
 | `index.html` → "Depoimentos" | **São exemplos.** Troque por avaliações reais de clientes (Google/WhatsApp). Depoimento inventado é propaganda enganosa. |
-| `index.html` → "Obras" e "Antes × Depois" | Troque pelas fotos reais dos trabalhos do Mestre. As atuais são do Unsplash (uso comercial liberado). |
+| `assets/obras/` | Fotos reais dos serviços (hero, antes/depois, serviços e galeria). Cada foto tem duas versões: `-lg.jpg` (1080 px) e `-sm.jpg` (640 px, para celular). O card "Texturas" ainda usa foto do Unsplash. |
 | `index.html` → `<head>` | `og:url` e o bloco `application/ld+json` (SEO local no Google). |
 | `js/main.js` → `CONFIG.calc` | Rendimento da tinta e produtividade da equipe usados na calculadora. |
 
